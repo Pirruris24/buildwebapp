@@ -273,7 +273,7 @@ handleManualInput = async () => {
   }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBo4lZTBQoFu5dtT7-RSyrp0v7Puat_uuw',
+  apiKey: '',
 })(MapContainer);
 
  
