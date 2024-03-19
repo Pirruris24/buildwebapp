@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
-    
+
 
     const [values, setValues] = useState({
         email: '',
@@ -23,10 +23,10 @@ function Login() {
 
         try {
             const response = await axios.post(`http://localhost:8000/login/${values.email} ${values.password}`);
-            
-    
-                navigate('/maps');
-           
+
+
+            navigate('/maps');
+
         } catch (error) {
             console.error('Error logging in:', error);
             setError('An error occurred while logging in');
@@ -34,43 +34,54 @@ function Login() {
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
-            <div className="bg-white p-3 rounded w-25">
-                <h2 style={{ color: 'Tomato' }}>Sign-In</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="email"><strong>Email</strong></label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={values.email}
-                            onChange={handleInputChange}
-                            placeholder="Enter Email"
-                            className="form-control rounded-0"
-                            required
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="password"><strong>Password</strong></label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={values.password}
-                            onChange={handleInputChange}
-                            placeholder="Enter Password"
-                            className="form-control rounded-0"
-                            required
-                        />
-                    </div>
-                    {error && <div className="text-danger">{error}</div>}
-                    <button type="submit" className="btn btn-success w-100 rounded-0">Log in</button>
-                    <p>You are agreeing to are Terms and Policies</p>
-                    <Link to="/registeruser" className="btn btn-default border w-100 rounded-0 text-decoration-none">Create Account</Link>
-                    <p />
-                    <Link to="/" className="btn btn-default border w-100 rounded-0 text-decoration-none">Home</Link>
-                </form>
+        <div className="index-page">
+            <div className="wrapper">
+                <div className="page-header header-filter">
+                    <div className="squares square1"></div>
+                    <div className="squares square2"></div>
+                    <div className="squares square3"></div>
+                    <div className="squares square4"></div>
+                    <div className="squares square5"></div>
+                    <div className="squares square6"></div>
+                    <div className="squares square7"></div>
+                </div>
+            </div>
+            <div className="container">
+                <div className="content-center register">
+                    <h1 className="h1-seo">Iniciar Sesión</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={values.email}
+                                onChange={handleInputChange}
+                                placeholder="Email"
+                                class="form-control"
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={values.password}
+                                onChange={handleInputChange}
+                                placeholder="Contraseña"
+                                class="form-control"
+                                required
+                            />
+                        </div>
+                        {error && <div className="text-danger">{error}</div>}
+                        <button type="submit" class="btn-round btn btn-primary btn-lg">Iniciar Sesión</button>
+                        <p>Estás aceptando los Términos y condiciones</p>
+                        <Link to="/registeruser" class="btn btn-info">Crear Cuenta</Link>
+                        <p />
+                        <Link to="/" class="btn-neutral btn btn-default">Home</Link>
+                    </form>
+                </div>
             </div>
         </div>
     );
