@@ -95,6 +95,7 @@ section {
   display: block;
 }
 
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -24152,5 +24153,36 @@ td.rdtYear:hover {
 .blockquote.blockquote-info small {
   color: #1d8cf8;
 }
+
+.map-section {
+  margin: 50px;
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+  padding: 0px;
+}
+
+.map-components {
+  display: flex;
+  width: 50%;
+  align-items: center;
+}
+
+
+.img-map {
+  margin: 20px;
+  height: auto;
+  width: 50%;
+}
+
+.prediction-container{
+  justify-content: center;
+  display: flex;
+}
+
+/* .component-container{
+  justify-content: center;
+  display: flex;
+} */
 
 /*# sourceMappingURL=blk-design-system-react.css.map */

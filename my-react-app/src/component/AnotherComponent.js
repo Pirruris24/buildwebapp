@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import ReactDOM from "react-dom/client";
 import crimemap from '../assets/crimemap.png'
 import businessmap from '../assets/bussinesmap.png'
@@ -9,273 +9,252 @@ import allhotelmap from '../assets/allhotelmap.png'
 import allpolicemap from '../assets/allpolicemap.png'
 import allpharmacymap from '../assets/allpharmacymap.png'
 import allhospitalsmap from '../assets/allhospitalsmap.png'
-import  MapContainer  from '../component/MyComponent';
+import MapContainer from '../component/MyComponent';
 
 
-export default function  AnotherComponent (){
+export default function AnotherComponent() {
 
 
-      //FETCH CRIME MAP DATA//
-    const [municipioCrime,setDataCrime] = useState([]);
-   // const [updated, setUpdated] = useState(municipioCrime);
-   
-
-    const handleChangeCrime = (eventCrime) => {
-      setDataCrime(eventCrime.target.value);
-    };
-    const handleClickCrime = () => {
-      // 👇 "municipioCrime" stores input field value
-     // setUpdated(municipioCrime);
-      fetch(`http://localhost:8000/crimeMap/${municipioCrime}`)
-            .then((responseCrime)=>responseCrime.json())
-            .then((responseDataCrime)=>{
-              setDataCrime(responseDataCrime);
-            })
-            .catch((error)=>{
-                
-            });
-    };
-
-      // FETCHA NEGOCIOS DATA//
-    const [municipioNegocios,setDataNegocios] = useState([]);
-   // const [updated1, setUpdated1] = useState(municipioNegocios);
-    
-
-    const handleChangeNegocios = (eventNegocios) => {
-      setDataNegocios(eventNegocios.target.value);
-    };
-    const handleClickNegocios = () => {
-      // 👇 "municipioNegocios" stores input field value
-      //setUpdated1(municipioNegocios);
-      fetch(`http://localhost:8000/businessMap/${municipioNegocios}`)
-            .then((responseNegocios)=>responseNegocios.json())
-            .then((responseDataNegocios)=>{
-              setDataNegocios(responseDataNegocios);
-            })
-            .catch((error)=>{
-                
-            });
-           
-    };
-
-   
-
-    
-  
-
-    //TRANSPORTATION MAP/CLUSTER
-  
-  
-    const handleClickTransportationMap = () => {
-      // 👇 "message" stores input field value
-      fetch(`http://localhost:8000/publicTransportZMG/`)
-            .catch((error)=>{
-                alert(error);
-            });
-    };
-
-    const handleClickAllBusiness = () => {
-      // 👇 "message" stores input field value
-      fetch(`http://localhost:8000/businessMap/`)
-            .catch((error)=>{
-                alert(error);
-            });
-    };
+  //FETCH CRIME MAP DATA//
+  const [municipioCrime, setDataCrime] = useState([]);
+  // const [updated, setUpdated] = useState(municipioCrime);
 
 
-    const handleClickAllCrimes = () => {
-      // 👇 "message" stores input field value
-      fetch(`http://localhost:8000/crimeMap/`)
-            .catch((error)=>{
-                alert("Error");
-            });
-    };
+  const handleChangeCrime = (eventCrime) => {
+    setDataCrime(eventCrime.target.value);
+  };
+  const handleClickCrime = () => {
+    // 👇 "municipioCrime" stores input field value
+    // setUpdated(municipioCrime);
+    fetch(`http://localhost:8000/crimeMap/${municipioCrime}`)
+      .then((responseCrime) => responseCrime.json())
+      .then((responseDataCrime) => {
+        setDataCrime(responseDataCrime);
+      })
+      .catch((error) => {
 
-    const handleClickAllHotels = () => {
-      // 👇 "message" stores input field value
-      fetch(`http://localhost:8000/hotelMap/`)
-            .catch((error)=>{
-                alert("Error");
-            });
-    };
+      });
+  };
 
-
-    const handleClickAllPolice = () => {
-      // 👇 "message" stores input field value
-      fetch(`http://localhost:8000/policeMap/`)
-            .catch((error)=>{
-                alert("Error");
-            });
-    };
+  // FETCHA NEGOCIOS DATA//
+  const [municipioNegocios, setDataNegocios] = useState([]);
+  // const [updated1, setUpdated1] = useState(municipioNegocios);
 
 
-    const handleClickAllPharmacy = () => {
-      // 👇 "message" stores input field value
-      fetch(`http://localhost:8000/pharmacyMap/`)
-            .catch((error)=>{
-                alert("Error");
-            });
-    };
+  const handleChangeNegocios = (eventNegocios) => {
+    setDataNegocios(eventNegocios.target.value);
+  };
+  const handleClickNegocios = () => {
+    // 👇 "municipioNegocios" stores input field value
+    //setUpdated1(municipioNegocios);
+    fetch(`http://localhost:8000/businessMap/${municipioNegocios}`)
+      .then((responseNegocios) => responseNegocios.json())
+      .then((responseDataNegocios) => {
+        setDataNegocios(responseDataNegocios);
+      })
+      .catch((error) => {
 
+      });
 
-    const handleClickAllHospitals = () => {
-      // 👇 "message" stores input field value
-      fetch(`http://localhost:8000/hospitalMap/`)
-            .catch((error)=>{
-                alert("Error");
-            });
-    };
-
-    return (
-        <div align="Center" >
-          <h1 style={{color:'Tomato'}}>Build</h1>
-          
-          <div >
-            <label htmlFor='text'>
-              <h2  >Accessibility to Transportation in Guadalajara</h2>
-              Check for update:{' '}
-              <button className='btn btn-success w-50' onClick={handleClickTransportationMap}>Check</button>
-              <p/>
-              </label>
-            {/* SET IMAGE FOR CRIME BARS MAP*/ }
-            <img src={transportationsmap}   width="1200" height="800" alt=""/>
-          </div>
-
-          <p/>
-
-          <div >
-            <label htmlFor='text'>
-              <h2 >Hotel Zones in Jalisco</h2>
-              Check for update:{' '}
-              <button className='btn btn-success w-50' onClick={handleClickAllHotels}>Check</button>
-              <p/>
-              </label>
-            {/* SET IMAGE FOR CRIME BARS MAP*/ }
-            <img src={allhotelmap}   width="1200" height="800" alt=""/>
-          </div>
-
-
-           <p/>
-
-          <div >
-            <label htmlFor='text'>
-              <h2 >Police Stations by Zones in Jalisco</h2>
-              Check for update:{' '}
-              <button className='btn btn-success w-50' onClick={handleClickAllPolice}>Check</button>
-              <p/>
-              </label>
-            {/* SET IMAGE FOR CRIME BARS MAP*/ }
-            <img src={allpolicemap}   width="1200" height="800" alt=""/>
-          </div>
-
-
-           <p/>
-
-          <div >
-            <label htmlFor='text'>
-              <h2 >Pharmacies by Zones in Jalisco</h2>
-              Check for update:{' '}
-              <button className='btn btn-success w-50' onClick={handleClickAllPharmacy}>Check</button>
-              <p/>
-              </label>
-            {/* SET IMAGE FOR CRIME BARS MAP*/ }
-            <img src={allpharmacymap}   width="1200" height="800" alt=""/>
-          </div>
+  };
 
 
 
-           <p/>
-
-          <div >
-            <label htmlFor='text'>
-              <h2 >Hospitals by Zones in Jalisco</h2>
-              Check for update:{' '}
-              <button className='btn btn-success w-50' onClick={handleClickAllHospitals}>Check</button>
-              <p/>
-              </label>
-            {/* SET IMAGE FOR CRIME BARS MAP*/ }
-            <img src={allhospitalsmap}   width="1200" height="800" alt=""/>
-          </div>
-
-          <p/>
-
-          <div >
-            <label htmlFor='text'>
-              <h2>All Business Zones in Jalisco</h2>
-              Check for update:{' '}
-              <button className='btn btn-success w-50' onClick={handleClickAllBusiness}>Check</button>
-              <p/>
-              </label>
-            {/* SET IMAGE FOR ALL BUSINESS MAP*/ }
-            <img src={allbusinessmap}   width="1200" height="800" alt=""/>
-          </div> 
-
-          <p/>
-
-          <div >
-            <label htmlFor='text'>
-              <h2 >Crime Rate in Jalisco</h2>
-              Check for update:{' '}
-              <button className='btn btn-success w-50'  onClick={handleClickAllCrimes}>Check</button>
-              <p/>
-            </label>
-            {/* SET IMAGE FOR ALL BUSINESS MAP*/ }
-            <img src={allcrimemap}   width="1200" height="800" alt=""/>
-          </div>
 
 
-         
 
-         <p/>
+  //TRANSPORTATION MAP/CLUSTER
 
-        {/* SEARCH FIELD FOR BUSINESS MAP STARTS*/ }
-          <div className='mb-3'>
-              <label htmlFor='text'>
 
-              <h2>Businesses by Area</h2>
-              Municipio:{' '}
-              <input className='form-control rounded-0' value={municipioNegocios} onChange={handleChangeNegocios} />
-              <p/>
-              <button className='btn btn-success w-50'  onClick={handleClickNegocios}>Search</button>
-              {/*<h2>Message: {municipioNegocios}</h2> */}
-              
-              {/*<h2>Updated: {updated1}</h2> */}
+  const handleClickTransportationMap = () => {
+    // 👇 "message" stores input field value
+    fetch(`http://localhost:8000/publicTransportZMG/`)
+      .catch((error) => {
+        alert(error);
+      });
+  };
 
-              </label>
-              <p/>
-            {/* SET IMAGE FOR BUSINESS MAP*/ }
-            <img src={businessmap}   width="1200" height="800" alt=""/>
-          </div>
-         {/* SEARCH FIELD FOR BUSINESS MAP ENDS*/ }
+  const handleClickAllBusiness = () => {
+    // 👇 "message" stores input field value
+    fetch(`http://localhost:8000/businessMap/`)
+      .catch((error) => {
+        alert(error);
+      });
+  };
 
-          {/* SEARCH FIELD FOR CRIME BARS STARTS*/ }
-          
-          <div className='mb-3'>
-            <label htmlFor='text'>
-              <h2 >Crime Zones by Area</h2>
-              Location:{' '}
-              <input className='form-control rounded-0' value={municipioCrime} onChange={handleChangeCrime}/>
-              <p/>
-              <button className='btn btn-success w-50'  onClick={handleClickCrime}>Search</button>
-              {/* <h2>Message: {municipioCrimeBars}</h2>*/ }
-              {/* <h2>Updated: {updated2}</h2>*/ }
-              </label>
-              <p/>
-            {/* SET IMAGE FOR CRIME BARS MAP*/ }
-            <img src={crimemap}   width="1200" height="800" alt=""/>
-          </div> 
 
-           
-          <diV>
-          <h2>Prediction Safest Zone Closest to Location</h2>
-      {/* Use the MapContainer component */}
-              <MapContainer />
-          </diV>    
+  const handleClickAllCrimes = () => {
+    // 👇 "message" stores input field value
+    fetch(`http://localhost:8000/crimeMap/`)
+      .catch((error) => {
+        alert("Error");
+      });
+  };
+
+  const handleClickAllHotels = () => {
+    // 👇 "message" stores input field value
+    fetch(`http://localhost:8000/hotelMap/`)
+      .catch((error) => {
+        alert("Error");
+      });
+  };
+
+
+  const handleClickAllPolice = () => {
+    // 👇 "message" stores input field value
+    fetch(`http://localhost:8000/policeMap/`)
+      .catch((error) => {
+        alert("Error");
+      });
+  };
+
+
+  const handleClickAllPharmacy = () => {
+    // 👇 "message" stores input field value
+    fetch(`http://localhost:8000/pharmacyMap/`)
+      .catch((error) => {
+        alert("Error");
+      });
+  };
+
+
+  const handleClickAllHospitals = () => {
+    // 👇 "message" stores input field value
+    fetch(`http://localhost:8000/hospitalMap/`)
+      .catch((error) => {
+        alert("Error");
+      });
+  };
+
+  return (
+    <div className="index-page" style={{ overflowX: 'hidden' }}>
+      <h1 className="h1-seo">BUILD</h1>
+      <div className='map-section'>
+        <div className='map-components'>
+          <label htmlFor='text'>
+            <h2  >Accesibilidad A Transporte </h2>
+            Buscar Actualizacion:{' '}
+            <button class="btn btn-success" onClick={handleClickTransportationMap}>Actualizar</button>
+          </label>
         </div>
-      
-      );  
-    }    
+        {/* SET IMAGE FOR CRIME BARS MAP*/}
+        <img src={transportationsmap} classname="img-map" className='img-map' alt="" />
+      </div>
+      <div className='map-section'>
+        <div className='map-components'>
+          <label htmlFor='text'>
+            <h2 >Hoteles Por Zonas En Jalisco</h2>
+            Buscar Actualizacion:{' '}
+            <button class="btn btn-success" onClick={handleClickAllHotels}>Actualizar</button>
+          </label>
+        </div>
+        {/* SET IMAGE FOR CRIME BARS MAP*/}
+        <img src={allhotelmap} classname="img-map" className='img-map' alt="" />
+      </div>
+      <div className='map-section'>
+        <div className='map-components'>
+          <label htmlFor='text'>
+            <h2 >Estaciones De Policia Por Zonas En Jalisco</h2>
+            Buscar Actualizacion:{' '}
+            <button class="btn btn-success" onClick={handleClickAllPolice}>Actualizar</button>
+          </label>
+        </div>
+        {/* SET IMAGE FOR CRIME BARS MAP*/}
+        <img src={allpolicemap} classname="img-map" className='img-map' alt="" />
+      </div>
+      <div className='map-section'>
+        <div className='map-components'>
+          <label htmlFor='text'>
+            <h2 >Farmacias Por Zonas En Jalisco</h2>
+            Buscar Actualizacion:{' '}
+            <button class="btn btn-success" onClick={handleClickAllPharmacy}>Actualizar</button>
+          </label>
+        </div>
+        {/* SET IMAGE FOR CRIME BARS MAP*/}
+        <img src={allpharmacymap} classname="img-map" className='img-map' alt="" />
+      </div>
+      <div className='map-section'>
+        <div className='map-components'>
+          <label htmlFor='text'>
+            <h2 >Hospitales Por Zonas En Jalisco</h2>
+            Buscar Actualizacion:{' '}
+            <button class="btn btn-success" onClick={handleClickAllHospitals}>Actualizar</button>
+          </label>
+        </div>
+        {/* SET IMAGE FOR CRIME BARS MAP*/}
+        <img src={allhospitalsmap} classname="img-map" className='img-map' alt="" />
+      </div>
+
+      <div className='map-section'>
+        <div className='map-components'>
+          <label htmlFor='text'>
+            <h2>Negocios Por Zonas Jalisco</h2>
+            Buscar Actualizacion:{' '}
+            <button class="btn btn-success" onClick={handleClickAllBusiness}>Actualizar</button>
+          </label>
+        </div>
+        {/* SET IMAGE FOR ALL BUSINESS MAP*/}
+        <img src={allbusinessmap} classname="img-map" className='img-map' alt="" />
+      </div>
+
+      <div className='map-section'>
+        <div className='map-components'>
+          <label htmlFor='text'>
+            <h2 >Tasa De Criminalidad En Jalisco</h2>
+            Buscar Actualizacion:{' '}
+            <button class="btn btn-success" onClick={handleClickAllCrimes}>Actualizar</button>
+          </label>
+        </div>
+        {/* SET IMAGE FOR ALL BUSINESS MAP*/}
+        <img src={allcrimemap} classname="img-map" className='img-map' alt="" />
+      </div>
+
+      {/* SEARCH FIELD FOR BUSINESS MAP STARTS*/}
+
+      <div className='map-section'>
+        <div className='map-components'>
+          <label htmlFor='text'>
+            <h2>Negocios Por Área</h2>
+            Municipio:{' '}
+            <input class="form-control" value={municipioNegocios} onChange={handleChangeNegocios} />
+            <button class="btn btn-success" onClick={handleClickNegocios}>Buscar</button>
+            {/*<h2>Message: {municipioNegocios}</h2> */}
+            {/*<h2>Updated: {updated1}</h2> */}
+          </label>
+        </div>
+        {/* SET IMAGE FOR BUSINESS MAP*/}
+        <img src={businessmap} classname="img-map" className='img-map' alt="" />
+        {/* SEARCH FIELD FOR BUSINESS MAP ENDS*/}
+      </div>
+
+      <div className='map-section'>
+        <div className='map-components'>
+          {/* SEARCH FIELD FOR CRIME BARS STARTS*/}
+          <label htmlFor='text'>
+            <h2 >Criminalidad Por Zonas</h2>
+            Location:{' '}
+            <input class="form-control" value={municipioCrime} onChange={handleChangeCrime} />
+            <button class="btn btn-success" onClick={handleClickCrime}>Buscar</button>
+            {/* <h2>Message: {municipioCrimeBars}</h2>*/}
+            {/* <h2>Updated: {updated2}</h2>*/}
+
+          </label>
+
+
+        </div>
+        {/* SET IMAGE FOR CRIME BARS MAP*/}
+        <img src={crimemap} classname="img-map" className='img-map' alt="" />
+      </div>
+      <h2>Predicción Zona Más Segura Más Cercana A La Ubicación</h2>
+      {/* Use the MapContainer component */}
+      <div>
+      <MapContainer />
+      </div>
+    </div>
+
+  );
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<AnotherComponent/>);
+root.render(<AnotherComponent />);
 //export default AnotherComponent;

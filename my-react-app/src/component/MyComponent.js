@@ -2,120 +2,120 @@ import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 class MapContainer extends Component {
-    constructor(props) {
-      super(props);
-  
-      this.state = {
-        markers: [],
-        apiResponse: null,
-        storedData: null,
-        activeMarker: {},
-        selectedPlace: {},
-        userClickedCoordinates: { lat: 0, lng: 0 },
-        combinedCoordinates: '',
-       
-      };
-    }
+  constructor(props) {
+    super(props);
 
-    updateCombinedCoordinates = (lat, lng) => {
-      const newCombinedCoordinates = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-      this.setState({
-        combinedCoordinates: newCombinedCoordinates,
-      });
+    this.state = {
+      markers: [],
+      apiResponse: null,
+      storedData: null,
+      activeMarker: {},
+      selectedPlace: {},
+      userClickedCoordinates: { lat: 0, lng: 0 },
+      combinedCoordinates: '',
+
     };
-  
-    onMapClick = async (mapProps, map, clickEvent) => {
-      const newMarker = {
-        lat: clickEvent.latLng.lat(),
-        lng: clickEvent.latLng.lng(),
-      };
-  
-      // Update the markers state
-      this.setState({
-        markers: [newMarker],
-        activeMarker: null, // Close any open info windows
-        userClickedCoordinates: newMarker,
-      });
+  }
 
-      this.updateCombinedCoordinates(newMarker.lat, newMarker.lng);
-      
-    };
-  
+  updateCombinedCoordinates = (lat, lng) => {
+    const newCombinedCoordinates = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+    this.setState({
+      combinedCoordinates: newCombinedCoordinates,
+    });
+  };
 
-
-handleManualInput = async () => {
-
-   // Clear previous markers
-   this.setState({
-    markers: [],
-  });
-
-  const enteredLat = parseFloat(this.state.enteredLat);
-  const enteredLng = parseFloat(this.state.enteredLng);
-
-  // Check if enteredLat and enteredLng are valid numbers
-  if (!isNaN(enteredLat) && !isNaN(enteredLng)) {
+  onMapClick = async (mapProps, map, clickEvent) => {
     const newMarker = {
-      lat: enteredLat,
-      lng: enteredLng,
-      color: 'blue', // You can set a different color for manually entered markers
+      lat: clickEvent.latLng.lat(),
+      lng: clickEvent.latLng.lng(),
     };
 
     // Update the markers state
-    this.setState((prevState) => ({
-      markers: [...prevState.markers, newMarker],
-    }));
+    this.setState({
+      markers: [newMarker],
+      activeMarker: null, // Close any open info windows
+      userClickedCoordinates: newMarker,
+    });
 
     this.updateCombinedCoordinates(newMarker.lat, newMarker.lng);
 
-    // Make an API request with the entered coordinates
-    try {
-      const response = await fetch(
-        `http://localhost:8000/predictZone/${enteredLng}/${enteredLat}`
-      );
+  };
 
-      if (!response.ok) {
-        throw new Error('API request failed');
-      }
 
-      const data = await response.json();
 
-      // Update the state with the API response
-      this.setState({
-        apiResponse: data,
-      });
+  handleManualInput = async () => {
 
-      // Update the marker position based on the prediction result
-      const predictedMarker = {
-        lat: parseFloat(data.latitud),
-        lng: parseFloat(data.longitud),
+    // Clear previous markers
+    this.setState({
+      markers: [],
+    });
+
+    const enteredLat = parseFloat(this.state.enteredLat);
+    const enteredLng = parseFloat(this.state.enteredLng);
+
+    // Check if enteredLat and enteredLng are valid numbers
+    if (!isNaN(enteredLat) && !isNaN(enteredLng)) {
+      const newMarker = {
+        lat: enteredLat,
+        lng: enteredLng,
+        color: 'blue', // You can set a different color for manually entered markers
       };
 
-      // Add the new marker with the predicted coordinates
+      // Update the markers state
       this.setState((prevState) => ({
-        markers: [
-          ...prevState.markers,
-          { ...newMarker, color: 'yellow' }, // Blue marker
-          { ...predictedMarker, color: 'green' }, // Green marker
-        ],
+        markers: [...prevState.markers, newMarker],
       }));
 
-      this.updateCombinedCoordinates(predictedMarker.lat, predictedMarker.lng);
+      this.updateCombinedCoordinates(newMarker.lat, newMarker.lng);
 
-      // Assuming you have a reference to the map, you can use it to pan to the new marker
-      const newMarkerLatLng = new window.google.maps.LatLng(
-        predictedMarker.lat,
-        predictedMarker.lng
-      );
-      this.map.panTo(newMarkerLatLng);
-    } catch (error) {
-      console.error('Error fetching data:', error);
+      // Make an API request with the entered coordinates
+      try {
+        const response = await fetch(
+          `http://localhost:8000/predictZone/${enteredLng}/${enteredLat}`
+        );
+
+        if (!response.ok) {
+          throw new Error('API request failed');
+        }
+
+        const data = await response.json();
+
+        // Update the state with the API response
+        this.setState({
+          apiResponse: data,
+        });
+
+        // Update the marker position based on the prediction result
+        const predictedMarker = {
+          lat: parseFloat(data.latitud),
+          lng: parseFloat(data.longitud),
+        };
+
+        // Add the new marker with the predicted coordinates
+        this.setState((prevState) => ({
+          markers: [
+            ...prevState.markers,
+            { ...newMarker, color: 'yellow' }, // Blue marker
+            { ...predictedMarker, color: 'green' }, // Green marker
+          ],
+        }));
+
+        this.updateCombinedCoordinates(predictedMarker.lat, predictedMarker.lng);
+
+        // Assuming you have a reference to the map, you can use it to pan to the new marker
+        const newMarkerLatLng = new window.google.maps.LatLng(
+          predictedMarker.lat,
+          predictedMarker.lng
+        );
+        this.map.panTo(newMarkerLatLng);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    } else {
+      alert('Please enter valid latitude and longitude values.');
     }
-  } else {
-    alert('Please enter valid latitude and longitude values.');
-  }
-};
- 
+  };
+
   // New function to handle API call on "Calcular" button click
   handleCalcularClick = async () => {
     // Get the last clicked coordinates
@@ -167,23 +167,24 @@ handleManualInput = async () => {
 
 
 
-    onMarkerClick = (props, marker, e) => {
-      this.setState({
-        activeMarker: marker,
-        selectedPlace: props,
-    
-      });
-    };
-  
-    handleInputChange = (event) => {
-      const { name, value } = event.target;
-      this.setState({
-        [name]: value,
-      });
-    };
-  
-    render() {
-      return (
+  onMarkerClick = (props, marker, e) => {
+    this.setState({
+      activeMarker: marker,
+      selectedPlace: props,
+
+    });
+  };
+
+  handleInputChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  render() {
+    return (
+      <div className='component-container'>
         <div>
           <div>
             {/* Display the API response */}
@@ -200,45 +201,48 @@ handleManualInput = async () => {
               </div>
             )}
           </div>
-  
+
           <div>
             <label>
               Combined Coordinates:
               <input
                 type="text"
-                className='form-control rounded-0'
+                class="form-control"
                 name="combinedCoordinates"
                 value={this.state.combinedCoordinates}
                 onChange={this.handleInputChange}
               />
-              <p/>
-              <button className='btn btn-success w-50' onClick={this.handleCalcularClick} >Calcular</button>
-              <p/>
+              <p />
+              <button class="btn btn-success" onClick={this.handleCalcularClick} >Calcular</button>
+              <p />
             </label>
           </div>
           <div>
-          <label>
-            Enter Latitude:
-            <input
-              type="text"
-              name="enteredLat"
-              value={this.state.enteredLat}
-              onChange={this.handleInputChange}
-              
-            />
-          </label>
-          <label>
-            Enter Longitude:
-            <input
-              type="text"
-              name="enteredLng"
-              value={this.state.enteredLng}
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <button onClick={this.handleManualInput}  className='btn btn-success '>Add Marker</button>
-          
-        </div>
+            <label>
+              Enter Latitude:
+              <input
+                type="text"
+                name="enteredLat"
+                class="form-control"
+                value={this.state.enteredLat}
+                onChange={this.handleInputChange}
+
+              />
+            </label>
+            <label>
+              Enter Longitude:
+              <input
+                type="text"
+                name="enteredLng"
+                class="form-control"
+                value={this.state.enteredLng}
+                onChange={this.handleInputChange}
+
+              />
+            </label>
+            <button onClick={this.handleManualInput} className='btn btn-success '>Add Marker</button>
+
+          </div>
           <Map
             google={this.props.google}
             onClick={this.onMapClick}
@@ -258,22 +262,23 @@ handleManualInput = async () => {
                 }}*/
                 onClick={this.onMarkerClick}
               />
-              
-             
+
+
             ))}
 
-          
-                
+
+
             {/* Display an info window for the active marker */}
-            
+
           </Map>
         </div>
-      );
-    }
+      </div>
+    );
   }
+}
 
 export default GoogleApiWrapper({
   apiKey: '',
 })(MapContainer);
 
- 
+
