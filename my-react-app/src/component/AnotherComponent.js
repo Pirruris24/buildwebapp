@@ -128,7 +128,7 @@ export default function AnotherComponent() {
 
   return (
     <div className="index-page" style={{ overflowX: 'hidden' }}>
-      <h1 className="h1-seo">BUILD</h1>
+      <h1 className="h1-seo" style={{ margin: '20px' }}>BUILD</h1>
       <div className='map-section'>
         <div className='map-components'>
           <label htmlFor='text'>
@@ -245,10 +245,10 @@ export default function AnotherComponent() {
         {/* SET IMAGE FOR CRIME BARS MAP*/}
         <img src={crimemap} classname="img-map" className='img-map' alt="" />
       </div>
-      <h2>Predicción Zona Más Segura Más Cercana A La Ubicación</h2>
-      {/* Use the MapContainer component */}
-      <div>
-      <MapContainer />
+      <h2 style={{ margin: '10px', alignSelf: 'center', display: 'block', textAlign: 'center' }}>Predicción Zona Más Segura Más Cercana A La Ubicación</h2>
+        {/* Use the MapContainer component */}
+        <div>
+          <MapContainer />
       </div>
     </div>
 

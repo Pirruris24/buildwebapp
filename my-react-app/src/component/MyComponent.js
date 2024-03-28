@@ -201,76 +201,75 @@ class MapContainer extends Component {
               </div>
             )}
           </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
 
-          <div>
-            <label>
-              Combined Coordinates:
-              <input
-                type="text"
-                class="form-control"
-                name="combinedCoordinates"
-                value={this.state.combinedCoordinates}
-                onChange={this.handleInputChange}
-              />
-              <p />
-              <button class="btn btn-success" onClick={this.handleCalcularClick} >Calcular</button>
-              <p />
-            </label>
+            <div>
+              <label style={{ margin: '20px' }}>
+                Combined Coordinates:
+                <input
+                  type="text"
+                  class="form-control"
+                  name="combinedCoordinates"
+                  value={this.state.combinedCoordinates}
+                  onChange={this.handleInputChange}
+                />
+              </label>
+            </div>
+            <div>
+              <label style={{ margin: '20px' }}>
+                Enter Latitude:
+                <input
+                  type="text"
+                  name="enteredLat"
+                  class="form-control"
+                  value={this.state.enteredLat}
+                  onChange={this.handleInputChange}
+
+                />
+              </label>
+              <label>
+                Enter Longitude:
+                <input
+                  type="text"
+                  name="enteredLng"
+                  class="form-control"
+                  value={this.state.enteredLng}
+                  onChange={this.handleInputChange}
+
+                />
+              </label>
+              <button onClick={this.handleManualInput} className='btn btn-default ' style={{margin:'10px'}}>Añadir Marcador</button>
+                <button class="btn btn-success" onClick={this.handleCalcularClick} >Calcular Zona</button>
+
+            </div>
+
           </div>
-          <div>
-            <label>
-              Enter Latitude:
-              <input
-                type="text"
-                name="enteredLat"
-                class="form-control"
-                value={this.state.enteredLat}
-                onChange={this.handleInputChange}
+          <div style={{bottom:'0'}}>
+            <Map
+              google={this.props.google}
+              onClick={this.onMapClick}
+              style={{ width: '100%', height: '800px', position: 'relative' }}
+              align="Center"
+              zoom={14}
+              initialCenter={{ lat: 20.672960406343122, lng: -103.36882906094334 }}
+            >
+              {this.state.markers.map((marker, index) => (
+                <Marker
+                  key={index}
+                  position={{ lat: marker.lat, lng: marker.lng }}
+                  /*icon={{
+                    url: `https://maps.google.com/mapfiles/ms/icons/${marker.color}-dot.png`,
+                    anchor: new window.google.maps.Point(32, 32),
+                    scaledSize: new window.google.maps.Size(32, 32),
+                  }}*/
+                  onClick={this.onMarkerClick}
+                />
 
-              />
-            </label>
-            <label>
-              Enter Longitude:
-              <input
-                type="text"
-                name="enteredLng"
-                class="form-control"
-                value={this.state.enteredLng}
-                onChange={this.handleInputChange}
 
-              />
-            </label>
-            <button onClick={this.handleManualInput} className='btn btn-success '>Add Marker</button>
+              ))}
 
+            </Map>
           </div>
-          <Map
-            google={this.props.google}
-            onClick={this.onMapClick}
-            style={{ width: '1200px', height: '800px', position: 'relative' }}
-            align="Center"
-            zoom={14}
-            initialCenter={{ lat: 20.672960406343122, lng: -103.36882906094334 }}
-          >
-            {this.state.markers.map((marker, index) => (
-              <Marker
-                key={index}
-                position={{ lat: marker.lat, lng: marker.lng }}
-                /*icon={{
-                  url: `https://maps.google.com/mapfiles/ms/icons/${marker.color}-dot.png`,
-                  anchor: new window.google.maps.Point(32, 32),
-                  scaledSize: new window.google.maps.Size(32, 32),
-                }}*/
-                onClick={this.onMarkerClick}
-              />
-
-
-            ))}
-
-
-
-            {/* Display an info window for the active marker */}
-
-          </Map>
         </div>
       </div>
     );

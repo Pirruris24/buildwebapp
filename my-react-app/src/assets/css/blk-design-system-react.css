@@ -24180,9 +24180,37 @@ td.rdtYear:hover {
   display: flex;
 }
 
-/* .component-container{
+.container-dt{
   justify-content: center;
   display: flex;
-} */
+}
+
+.container-db {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.custom-table {
+  width: 100%; /* Opcional: ajusta el ancho de la tabla según sea necesario */
+  border-collapse: collapse; /* Combina los bordes de las celdas */
+}
+
+.custom-table th, .custom-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center; /* Centra el texto en todas las celdas */
+}
+
+.custom-table th {
+  background-color: #f2f2f2; /* Color de fondo para las celdas de encabezado */
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* Color de fondo para filas pares */
+}
+
+
 
 /*# sourceMappingURL=blk-design-system-react.css.map */
