@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "./NavBar";
 
 function AdminBuildDB() {
     const [tables, setTables] = useState([]);
@@ -68,6 +69,7 @@ function AdminBuildDB() {
 
     return (
         <div>
+            <Navbar/>
             <h1 className="h1-seo" style={{ fontSize: '90px',  margin: '10px', alignSelf: 'center', display: 'block', textAlign: 'center'  }}>Tablas En La Bases De Datos</h1>
             <table className="custom-table">
                 <thead>

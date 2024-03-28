@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Papa from 'papaparse';
 import { Button, Input } from 'reactstrap';
+import Navbar from "./NavBar";
 
 function DataTransformation() {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -116,6 +117,7 @@ function DataTransformation() {
 
     return (
         <div>
+            <Navbar/>
             <div className="container" style={{ height: '100%', justifyContent: 'center' }}>
                 <br />
                 <div className="container-dt" style={{display:"flex", flexDirection:'column', alignItems:"center"}}>

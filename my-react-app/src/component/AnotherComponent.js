@@ -10,7 +10,7 @@ import allpolicemap from '../assets/allpolicemap.png'
 import allpharmacymap from '../assets/allpharmacymap.png'
 import allhospitalsmap from '../assets/allhospitalsmap.png'
 import MapContainer from '../component/MyComponent';
-
+import Navbar from './NavBar';
 
 export default function AnotherComponent() {
 
@@ -128,6 +128,7 @@ export default function AnotherComponent() {
 
   return (
     <div className="index-page" style={{ overflowX: 'hidden' }}>
+      <Navbar/> 
       <h1 className="h1-seo" style={{ margin: '20px' }}>BUILD</h1>
       <div className='map-section'>
         <div className='map-components'>
